@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="rpg訓練.css">
+</head>
+<body>
+<p>目前技能點:</p><p id="sp">100</p><br>	
+<p><abbr title="影響:物理攻擊力大小、暴擊傷害大小、少許體質和敏捷">力量:</abbr></p><p id="str">0</p><br>
+<button id="str1" onclick="str加()">+</button><button id="str2" onclick="str減()">-</button><br>
+
+<p><abbr title="影響:魔法攻擊力大小、魔力值大小">智力:</abbr></p><p id="int">0</p><br>
+<button id="int1" onclick="int加()">+</button><button id="int2" onclick="int減()">-</button><br>
+
+<p><abbr title="增加命中率以及少許暴擊率">敏捷:</abbr></p><p id="dex">0</p><br>
+<button id="dex1" onclick="dex加()">+</button><button id="dex2" onclick="dex減()">-</button><br>
+
+<p><abbr title="增加血量最大值以及防禦力和部分抗性">體質:</abbr></p><p id="vit">0</p><br>
+<button id="vit1" onclick="vit加()">+</button><button id="vit2" onclick="vit減()">-</button><br>
+
+<p><abbr title="增加暴擊率、掉落物獲取(運氣無法透過訓練增加)">運氣:</abbr></p><p>10</p><br>
+
+
+
+<footer><button onclick="window.location.href='rpg列表頁.html'" id="切換頁面">返回</button></footer>
+</body>
+
+<script>
+function str加() {
+	let sp = parseInt(document.querySelector('#sp').innerText);
+	let str = parseInt(document.querySelector('#str').innerText);
+
+	if (sp > 0) {
+		sp--;
+		str++;
+		document.querySelector('#sp').innerText = sp;
+		document.querySelector('#str').innerText = str;
+	}
+};
+function int加() {
+	let sp = parseInt(document.querySelector('#sp').innerText);
+	let int = parseInt(document.querySelector('#int').innerText);
+
+	if (sp > 0) {
+		sp--;
+		int++;
+		document.querySelector('#sp').innerText = sp;
+		document.querySelector('#int').innerText = int;
+	}
+};
+function dex加() {
+	let sp = parseInt(document.querySelector('#sp').innerText);
+	let dex = parseInt(document.querySelector('#dex').innerText);
+
+	if (sp > 0) {
+		sp--;
+		dex++;
+		document.querySelector('#sp').innerText = sp;
+		document.querySelector('#dex').innerText = dex;
+	}
+};
+function vit加() {
+	let sp = parseInt(document.querySelector('#sp').innerText);
+	let vit = parseInt(document.querySelector('#vit').innerText);
+
+	if (sp > 0) {
+		sp--;
+		vit++;
+		document.querySelector('#sp').innerText = sp;
+		document.querySelector('#vit').innerText = vit;
+	}
+};
+function str減() {
+	let sp = parseInt(document.querySelector('#sp').innerText);
+	let str = parseInt(document.querySelector('#str').innerText);
+
+	if (str > 0) {
+		sp++;
+		str--;
+		document.querySelector('#sp').innerText = sp;
+		document.querySelector('#str').innerText = str;
+	}
+};
+function int減() {
+	let sp = parseInt(document.querySelector('#sp').innerText);
+	let int = parseInt(document.querySelector('#int').innerText);
+
+	if (int > 0) {
+		sp++;
+		int--;
+		document.querySelector('#sp').innerText = sp;
+		document.querySelector('#int').innerText = int;
+	}
+};
+function dex減() {
+	let sp = parseInt(document.querySelector('#sp').innerText);
+	let dex = parseInt(document.querySelector('#dex').innerText);
+
+	if (dex > 0) {
+		sp++;
+		dex--;
+		document.querySelector('#sp').innerText = sp;
+		document.querySelector('#dex').innerText = dex;
+	}
+};
+function vit減() {
+	let sp = parseInt(document.querySelector('#sp').innerText);
+	let vit = parseInt(document.querySelector('#vit').innerText);
+
+	if (vit > 0) {
+		sp++;
+		vit--;
+		document.querySelector('#sp').innerText = sp;
+		document.querySelector('#vit').innerText = vit;
+	}
+};
+
+</script>
+
+</html>

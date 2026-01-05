@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>python rpg轉成html版測試</title>
+	<link rel="stylesheet" type="text/css" href="rpg列表頁.css">
+</head>
+<body>
+	<a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"><img src="night3.gif"></a>
+<p>目錄:<br>
+1.遊戲<br>
+2.背包<br>
+3.資料<br>
+4.訓練<br>
+5.商店</p>
+<form>
+<input type="text" id="a">
+</form>
+	<button type="button">輸入完按這</button>
+<script>
+let btn = document.querySelector("button");
+btn.addEventListener("click", function(){
+let a=document.getElementById("a").value;
+	if (a=="1"||a=="遊戲"){
+	window.location.href = 'rpg遊戲.html'
+	}
+	else if(a=="2"||a=="背包"){
+	window.location.href = 'rpg背包.html'
+	}
+	else if(a=="3"||a=="資料"){
+	window.location.href = 'rpg資料.html'
+	}
+	else if(a=="4"||a=="訓練"){
+	window.location.href = 'rpg訓練.html'
+	}
+	else if(a=="5"||a=="商店"){
+	window.location.href = 'rpg商店.html'
+	}
+	else if(a=="rick roll"||a=="瑞克搖"){
+	const rickroll = event.target.value;
+    window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ{rickroll}'
+	}
+	else if(a=="有時候我真得好想逃離這一切"){
+	const hm = event.target.value;
+	window.location.href = 'https://youtu.be/nwS6nqc20UM?si=XCEEWzNoFbSvQ2ri{hm}'	
+	}
+	else if(a==""){
+	alert("沒東西阿!哥們?至少打個字吧...")
+	}
+	else{
+	alert("你在打什麼??(請打數字1~6)")	
+	}
+	});
+document.getElementById("a").addEventListener("keydown", function(event){
+    if (event.key === "Enter") {
+        event.preventDefault();
+        btn.click();           
+    }
+});
+</script>
+</body>
+</html>

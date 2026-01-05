@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>戰鬥!!!!!</title>
+	<link rel="stylesheet" type="text/css" href="戰鬥.css">
+</head>
+<body>
+<div id="player">
+<h3>玩家</h3>
+<img src="80914.png" id="作者"><br>
+HP <progress id="playerHpBar" max="99999999" value="99999999"></progress>
+<span id="playerHpText"></span><br>
+
+MP <progress id="playerMpBar" max="99999999" value="99999999"></progress>
+<span id="playerMpText"></span><br>
+<button onclick="playerAction('attack')">攻擊</button><br>
+<button onclick="playerAction('skill')">火球術</button>
+</div>
+
+<div id="monster">
+<h3>敵人</h3>
+<img src="劍.png" id="劍"><br>
+HP <progress id="enemyHpBar" max="1" value="1"></progress>
+<span id="enemyHpText"></span><br>
+
+MP <progress id="enemyMpBar" max="1" value="1"></progress>
+<span id="enemyMpText"></span>
+</div>
+
+</body>
+<script>
+const player = {
+  name: "作者",
+  hp: 99999999,
+  maxHp: 99999999,
+  mp: 99999999,
+  maxMp: 9999999,
+  atk: 99999999,
+  def: 99999999
+};
+
+const enemy = {
+  name: "訓練用假人",
+  hp: 1,
+  maxHp: 1,
+  mp: 1,
+  maxMp: 1,
+  atk: 1,
+  def: 0
+};
+	function updateStatus() {
+  // 玩家
+  document.getElementById("playerHpBar").max = player.maxHp;
+  document.getElementById("playerHpBar").value = player.hp;
+  document.getElementById("playerHpText").textContent =
+    `${player.hp} / ${player.maxHp}`;
+
+  document.getElementById("playerMpBar").max = player.maxMp;
+  document.getElementById("playerMpBar").value = player.mp;
+  document.getElementById("playerMpText").textContent =
+    `${player.mp} / ${player.maxMp}`;
+
+  // 敵人
+  document.getElementById("enemyHpBar").max = enemy.maxHp;
+  document.getElementById("enemyHpBar").value = enemy.hp;
+  document.getElementById("enemyHpText").textContent =
+    `${enemy.hp} / ${enemy.maxHp}`;
+
+  document.getElementById("enemyMpBar").max = enemy.maxMp;
+  document.getElementById("enemyMpBar").value = enemy.mp;
+  document.getElementById("enemyMpText").textContent =
+    `${enemy.mp} / ${enemy.maxMp}`;
+}
+function attack(attacker, defender) {
+  let damage = Math.max(
+    attacker.atk - defender.def + Math.floor(Math.random() * 5),
+    1
+  );
+  defender.hp -= damage;
+  if (defender.hp < 0) defender.hp = 0;
+
+  console.log(`${attacker.name} 攻擊，造成 ${damage} 傷害`);
+  updateStatus();
+}
+function castFireball(caster, target) {
+  if (caster.mp < 10) {
+    console.log("MP 不足！");
+    return;
+  }
+
+  caster.mp -= 10;
+  target.hp -= 25;
+  if (target.hp < 0) target.hp = 0;
+
+  console.log("火球術命中！");
+  updateStatus();
+}
+function enemyTurn() {
+  if (enemy.hp <= 0) return;
+
+  setTimeout(() => {
+    attack(enemy, player);
+  }, 500);
+}
+function playerAction(action) {
+  if (player.hp <= 0) return;
+
+  switch(action) {
+    case "attack":
+      attack(player, enemy);
+      enemyTurn();
+      break;
+
+    case "skill":
+      castFireball(player, enemy);
+      enemyTurn();
+      break;
+  }
+}
+function checkDeath() {
+  if (player.hp <= 0) {
+    alert("你被擊敗了！");
+  }
+  if (enemy.hp <= 0) {
+    alert("敵人倒下了！");
+  }
+}
+</script>
+</html>

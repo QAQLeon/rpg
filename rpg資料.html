@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="狀態.css">
+	<title>角色資料</title>
+</head>
+<body>
+<p id="rr">玩家職業：</p>
+<p id="玩家職業" style="display:inline;">無業遊民</p>
+<button onclick="toggleJob()" style="display:inline;">更改</button>	
+<div id="職業選單" style="display:none; ">
+  <button onclick="setJob('冒險者')">冒險者</button><br>
+  <button onclick="setJob('戰士')">戰士</button><br>
+  <button onclick="setJob('劍士')">劍士</button><br>
+  <button onclick="setJob('法師')">法師</button><br>
+  <button onclick="setJob('弓箭手')">弓箭手</button><br>
+  <button onclick="setJob('盜賊')">盜賊</button><br>
+  <button onclick="setJob('刺客')">刺客</button><br>
+  <button onclick="setJob('牧師')">牧師</button><br>
+  <button onclick="setJob('騎士')">騎士</button><br>
+  <button onclick="setJob('召喚師')">召喚師</button>
+</div>
+<br>
+<p id="rr">玩家性別：</p>
+<p id="玩家性別" style="display:inline;">未知</p>
+<button onclick="togglegender()" style="display:inline;">更改</button>
+<div id="性別選單" style="display:none; ">
+  <button onclick="setgender('男性')">男性</button><br>
+  <button onclick="setgender('女性')">女性</button><br>
+  <button onclick="setgender('第三性')">第三性</button><br>
+  <button onclick="setgender('未知')">未知</button>
+</div>
+<br>
+<p id="rr">玩家身分：</p>
+<p id="玩家身分" style="display:inline;">未知</p>
+<button onclick="toggleidentity()" style="display:inline;">更改</button>
+<div id="身分選單" style="display:none; ">
+  <button onclick="setidentity('村民')">村民</button><br>
+  <button onclick="setidentity('商人')">商人</button><br>
+  <button onclick="setidentity('貴族')">貴族</button><br>
+  <button onclick="setidentity('冒險者協會成員')">冒險者協會成員</button><br>
+  <button onclick="setidentity('傭兵')">傭兵</button><br>
+  <button onclick="setidentity('流浪者')">流浪者</button><br>
+  <button onclick="setidentity('學者')">學者</button><br>
+  <button onclick="setidentity('罪犯')">罪犯</button><br>
+  <button onclick="setidentity('祭司')">祭司</button><br>
+  <button onclick="setidentity('王國使者')">王國使者</button>
+</div>
+<br>
+<p id="rr">玩家名字:  </p><p id="玩家名字">   無名氏</p>		
+<button id="更改名字" style="display:inline;" onclick="display1()">更改</button>
+<p id="名字更改" style="display:none;">名字更改: </p>
+<input type="text" id="名字" style="display:none;">	
+<button type="玩家名字按鈕" id="玩家名字按鈕" style="display:none;" onclick="display2()">確認
+</button>
+<script>
+function toggleJob() {
+  let menu = document.getElementById("職業選單");
+  menu.style.display = (menu.style.display === "none") ? "block" : "none";
+}
+
+function setJob(job) {
+  document.getElementById("玩家職業").innerText = job;
+  document.getElementById("職業選單").style.display = "none";
+}
+function togglegender() {
+  let menu = document.getElementById("性別選單");
+  menu.style.display = (menu.style.display === "none") ? "block" : "none";
+}
+
+function setgender(gender) {
+  document.getElementById("玩家性別").innerText = gender;
+  document.getElementById("性別選單").style.display = "none";
+}	
+function toggleidentity() {
+  let menu = document.getElementById("身分選單");
+  menu.style.display = (menu.style.display === "none") ? "block" : "none";
+}
+
+function setidentity(identity) {
+  document.getElementById("玩家身分").innerText = identity;
+  document.getElementById("身分選單").style.display = "none";
+}	
+	let d=document.querySelector("#玩家名字按鈕")
+	d.addEventListener("click",function() {
+		let dd=document.querySelector("#名字").value
+		if (dd==""){
+			document.querySelector('#玩家名字').innerHTML = '無名氏';
+		}
+		else{
+			document.querySelector('#玩家名字').innerHTML = dd;
+		}
+		display2();
+	});
+	function display1(){
+		let a = document.getElementById("更改名字");
+		let b = document.getElementById("名字更改");
+		let c = document.getElementById("名字");
+		let d = document.getElementById("玩家名字按鈕");
+		a.style.display = "none";
+		b.style.display = "block";
+		c.style.display = "block";
+		d.style.display = "block";		
+	}
+	function display2(){
+		let a = document.getElementById("更改名字");
+		let b = document.getElementById("名字更改");
+		let c = document.getElementById("名字");
+		let d = document.getElementById("玩家名字按鈕");
+		a.style.display = "inline";
+		b.style.display = "none";
+		c.style.display = "none";
+		d.style.display = "none";		
+	}				
+</script>
+<footer><button onclick="window.location.href='rpg列表頁.html'" id="切換頁面">返回</button></footer>
+</body>
+</html>
