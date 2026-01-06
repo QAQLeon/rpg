@@ -3,127 +3,151 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title></title>
-	<link rel="stylesheet" type="text/css" href="rpg遊戲.css">
+	<title>戰鬥!!!!!</title>
+	<link rel="stylesheet" type="text/css" href="戰鬥.css">
 </head>
 <body>
-<div id="head">
-	<h1>遊戲頁面!以下是面板~</h1>
+<div id="player">
+<h3>玩家</h3>
+<img src="80914.png" id="作者"><br>
+HP <progress id="playerHpBar" max="100" value="100"></progress>
+<span id="playerHpText"></span><br>
+
+MP <progress id="playerMpBar" max="100" value="100"></progress>
+<span id="playerMpText"></span><br>
+<button onclick="playerAction('attack')">攻擊</button><br>
+<button onclick="playerAction('skill')">火球術</button><br>
+<button id='自殘' onclick="seleblood(player)">自損血</button><br>
+<button id="回血" onclick="healthy(player)">回血</button>
 </div>
-<div id="body">	
-<div id="面板">
-<table id="玩家標籤">
-	<tbody>
-		<tr>
-			<th>進攻方</th>
-        </tr>
-        <tr>
-            <td>
-            <div>
-            <img src="80914.PNG">
-            </div>
-            </td>
-        </tr>
-		<tr>
-			<th class="標籤1"><mark>玩家名:</mark></th>
-			<th>作者</th>
-		</tr>
-		<tr>
-			<th class="標籤1"><mark>等級:</mark></th>
-			<th>infinite</th>
-		</tr>
-		<tr>
-			<th class="標籤1"><mark>血量:</mark></th>
-			<th>infinite</th>
-		</tr>
-		<tr>
-			<th class="標籤1"><mark>防禦:</mark></th>
-			<th>infinite</th>
-		</tr>
-		<tr>
-			<th class="標籤1"><mark>攻擊力:</mark></th>
-			<th>infinite</th>
-		</tr>
-		<tr>
-			<th class="標籤1"><mark>智力:</mark></th>
-			<th>infinite</th>
-		</tr>
-		<tr>
-			<th class="標籤1"><mark>錢包:</mark></th>
-			<th>infinite</th>
-		</tr>
-		<tr>
-			<th class="標籤1"><mark>運氣:</mark></th>
-			<th>?</th>
-		</tr>
-		<tr>
-			<th class="標籤1"><mark>暴擊率:</mark></th>
-			<th>infinite</th>
-		</tr>
-		<tr>
-			<th class="標籤1"><mark>暴擊傷害:</mark></th>
-			<th>infinite</th>
-		</tr>
-	</tbody>
-</table>
-<table id="怪物標籤">
-	<tbody>
-		<tr>
-			<th>防守方</th>
-        </tr>
-	    <tr>
-	        <td>
-	        <div>
-	        <img src="劍.png">
-	        </div>
-	        </td>
-	    </tr>
-		<tr>
-			<th class="標籤2"><mark>怪物名:</mark></th>
-			<th>訓練用假人</th>
-		</tr>
-		<tr>
-			<th class="標籤2"><mark>等級:</mark></th>
-			<th>1</th>
-		</tr>
-		<tr>
-			<th class="標籤2"><mark>血量:</mark></th>
-			<th>1</th>
-		</tr>
-		<tr>
-			<th class="標籤2"><mark>防禦:</mark></th>
-			<th>0</th>
-		</tr>
-		<tr>
-			<th class="標籤2"><mark>攻擊力:</mark></th>
-			<th>1</th>
-		</tr>
-		<tr>
-			<th class="標籤2"><mark>智力:</mark></th>
-			<th>1</th>
-		</tr>
-		<tr>
-			<th class="標籤2"><mark>錢包:</mark></th>
-			<th>比路邊乞丐還少</th>
-		</tr>
-		<tr>
-			<th class="標籤2"><mark>運氣:</mark></th>
-			<th>?</th>
-		</tr>
-		<tr>
-			<th class="標籤2"><mark>暴擊率:</mark></th>
-			<th>?</th>
-		</tr>
-		<tr>
-			<th class="標籤2"><mark>暴擊傷害:</mark></th>
-			<th>?</th>
-		</tr>
-	</tbody>
-</table>
-</div>
-<button onclick="window.location.href='戰鬥.html'">攻擊!</button>
+
+<div id="monster">
+<h3>敵人</h3>
+<img src="劍.png" id="劍"><br>
+HP <progress id="enemyHpBar" max="1" value="1"></progress>
+<span id="enemyHpText"></span><br>
+
+MP <progress id="enemyMpBar" max="1" value="1"></progress>
+<span id="enemyMpText"></span>
 </div>
 
 </body>
+<script>
+const player = {
+  name: "作者",
+  hp: 100,
+  maxHp: 100,
+  mp: 100,
+  maxMp: 100,
+  atk: 1,
+  def: 1,
+};
 
+const enemy = {
+  name: "訓練用假人",
+  hp: 100,
+  maxHp: 100,
+  mp: 100,
+  maxMp: 100,
+  atk: 1,
+  def: 1,
+};	
+	function updateStatus() {
+  // 玩家
+  document.getElementById("playerHpBar").max = player.maxHp;
+  document.getElementById("playerHpBar").value = player.hp;
+  document.getElementById("playerHpText").textContent =
+    `${player.hp} / ${player.maxHp}`;
+
+  document.getElementById("playerMpBar").max = player.maxMp;
+  document.getElementById("playerMpBar").value = player.mp;
+  document.getElementById("playerMpText").textContent =
+    `${player.mp} / ${player.maxMp}`;
+
+  // 敵人
+  document.getElementById("enemyHpBar").max = enemy.maxHp;
+  document.getElementById("enemyHpBar").value = enemy.hp;
+  document.getElementById("enemyHpText").textContent =
+    `${enemy.hp} / ${enemy.maxHp}`;
+
+  document.getElementById("enemyMpBar").max = enemy.maxMp;
+  document.getElementById("enemyMpBar").value = enemy.mp;
+  document.getElementById("enemyMpText").textContent =
+    `${enemy.mp} / ${enemy.maxMp}`;
+}
+function attack(attacker, defender) {
+  let damage = Math.max(
+    attacker.atk - defender.def + Math.floor(Math.random() * 5),
+    1
+  );
+  defender.hp -= damage;
+  if (defender.hp < 0) defender.hp = 0;
+
+  console.log(`${attacker.name} 攻擊，造成 ${damage} 傷害`);
+  updateStatus();
+}
+function castFireball(caster, target) {
+  if (caster.mp < 10) {
+    console.log("MP 不足！");
+    return;
+  }
+
+  caster.mp -= 10;
+  target.hp -= 25;
+  if (target.hp < 0) target.hp = 0;
+
+  console.log("火球術命中！");
+  updateStatus();
+}
+function enemyTurn() {
+  if (enemy.hp <= 0) return;
+
+  setTimeout(() => {
+    attack(enemy, player);
+  }, 500);
+}
+function playerAction(action) {
+  if (player.hp <= 0) return;
+
+  switch(action) {
+    case "attack":
+      attack(player, enemy);
+      enemyTurn();
+      break;
+
+    case "skill":
+      castFireball(player, enemy);
+      enemyTurn();
+      break;
+  }
+}
+function checkDeath() {
+  if (player.hp <= 0) {
+    alert("你被擊敗了！");
+  }
+  if (enemy.hp <= 0) {
+    alert("敵人倒下了！");
+  }
+}
+function seleblood(caster) {
+  let cost = Math.max(
+    Math.floor(caster.hp * 0.5),
+    1
+  );
+  caster.hp -= cost
+    if (caster.hp < 0) caster.hp = 0;
+
+  caster.maxHp += cost 
+
+  console.log(`${caster.name} 使用自損血，對自己造成 ${cost} 傷害，並增加了${cost}最大血量`);
+  updateStatus();
+}
+function healthy(caster) {
+	caster.hp+=caster.maxHp*0.5
+		if (caster.hp>=caster.maxHp) caster.hp=caster.maxHp
+	console.log(`${caster.name}使自己回復了50%血量`)
+	updateStatus();
+}
+updateStatus()
+</script>
 </html>
