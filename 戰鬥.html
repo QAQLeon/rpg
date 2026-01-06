@@ -9,14 +9,16 @@
 <body>
 <div id="player">
 <h3>玩家</h3>
-<img src="80914.PNG" id="作者"><br>
-HP <progress id="playerHpBar" max="99999999" value="99999999"></progress>
+<img src="80914.png" id="作者"><br>
+HP <progress id="playerHpBar" max="100" value="100"></progress>
 <span id="playerHpText"></span><br>
 
-MP <progress id="playerMpBar" max="99999999" value="99999999"></progress>
+MP <progress id="playerMpBar" max="100" value="100"></progress>
 <span id="playerMpText"></span><br>
 <button onclick="playerAction('attack')">攻擊</button><br>
-<button onclick="playerAction('skill')">火球術</button>
+<button onclick="playerAction('skill')">火球術</button><br>
+<button id='自殘' onclick="seleblood(player)">自損血</button><br>
+<button id="回血" onclick="healthy(player)">回血</button>
 </div>
 
 <div id="monster">
@@ -33,23 +35,23 @@ MP <progress id="enemyMpBar" max="1" value="1"></progress>
 <script>
 const player = {
   name: "作者",
-  hp: 99999999,
-  maxHp: 99999999,
-  mp: 99999999,
-  maxMp: 9999999,
-  atk: 99999999,
-  def: 99999999
+  hp: 100,
+  maxHp: 100,
+  mp: 100,
+  maxMp: 100,
+  atk: 1,
+  def: 1,
 };
 
 const enemy = {
   name: "訓練用假人",
-  hp: 1,
-  maxHp: 1,
-  mp: 1,
-  maxMp: 1,
+  hp: 100,
+  maxHp: 100,
+  mp: 100,
+  maxMp: 100,
   atk: 1,
-  def: 0
-};
+  def: 1,
+};	
 	function updateStatus() {
   // 玩家
   document.getElementById("playerHpBar").max = player.maxHp;
@@ -127,6 +129,26 @@ function checkDeath() {
     alert("敵人倒下了！");
   }
 }
-</script>
+function seleblood(caster) {
+  let cost = Math.max(
+    Math.floor(caster.hp * 0.5),
+    1
+  );
+  caster.hp -= cost
+    if (caster.hp < 0) caster.hp = 0;
 
+  caster.maxHp += cost 
+
+  console.log(`${caster.name} 使用自損血，對自己造成 ${cost} 傷害，並增加了${cost}最大血量`);
+  updateStatus();
+}
+function healthy(caster) {
+	caster.hp+=caster.maxHp*0.5
+		if (caster.hp>=caster.maxHp) caster.hp=caster.maxHp
+	console.log(`${caster.name}使自己回復了50%血量`)
+	updateStatus();
+}
+updateStatus()
+</script>
 </html>
+
